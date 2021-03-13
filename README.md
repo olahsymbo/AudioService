@@ -16,7 +16,7 @@ First, clone the repo
 Goto project directory and setup virtual environment:
 
 ```
-cd hypi_services_ocr
+cd AudioService
 pip3 install virtualenv
 virtualenv audioserv
 source audioserv/bin/activate
