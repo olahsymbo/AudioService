@@ -45,19 +45,19 @@ class AudioTest(unittest.TestCase):
 
     def test_delete_song(self):
         tester = app.test_client(self)
-        response = tester.delete("http://127.0.0.1:5000/delete/song/10")
+        response = tester.delete("http://127.0.0.1:5000/delete/song/14")
 
         self.assertEqual(200, response.status_code)
 
     def test_delete_podcast(self):
         tester = app.test_client(self)
-        response = tester.delete("http://127.0.0.1:5000/delete/podcast/10")
+        response = tester.delete("http://127.0.0.1:5000/delete/podcast/14")
 
         self.assertEqual(200, response.status_code)
 
     def test_delete_audiobook(self):
         tester = app.test_client(self)
-        response = tester.delete("http://127.0.0.1:5000/delete/audiobook/10")
+        response = tester.delete("http://127.0.0.1:5000/delete/audiobook/14")
 
         self.assertEqual(200, response.status_code)
 
