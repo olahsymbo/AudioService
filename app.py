@@ -40,10 +40,10 @@ def create_audio():
             return jsonify(output.true_output()), 200
         except Exception as error:
             output = api_response(data)
-            return jsonify(output.error_output()), 500
+            return jsonify(output.error_output()), 400
 
     else:
-        return jsonify(success=False), 400
+        return jsonify(success=False), 500
 
 
 @app.route("/delete/<audioFileType>/<audioFileID>", methods=['DELETE'])
@@ -64,10 +64,10 @@ def delete_audio(audioFileType, audioFileID):
 
             return jsonify(success=True), 200
         except Exception as error:
-            return jsonify(success=False), 500
+            return jsonify(success=False), 400
 
     else:
-        return jsonify(success=False), 400
+        return jsonify(success=False), 500
 
 
 @app.route("/update/<audioFileType>/<audioFileID>", methods=['PUT'])
@@ -94,10 +94,10 @@ def update_audio(audioFileType, audioFileID):
             return jsonify(output.true_output()), 200
         except Exception as error:
             output = api_response(metadata)
-            return jsonify(output.error_output()), 500
+            return jsonify(output.error_output()), 400
 
     else:
-        return jsonify(success=False), 400
+        return jsonify(success=False), 500
 
 
 @app.route("/get/<audioFileType>/<audioFileID>", methods=['GET'])
@@ -117,11 +117,11 @@ def get_audio(audioFileType, audioFileID):
             return jsonify(output.true_output()), 200
         except Exception as error:
             output = api_response(instance)
-            return jsonify(output.error_output()), 500
+            return jsonify(output.error_output()), 400
 
     else:
-        return jsonify(success=False), 400
+        return jsonify(success=False), 500
 
 
 if __name__ == "__main__":
-    app.run(host= '0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=True)

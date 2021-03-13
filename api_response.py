@@ -7,13 +7,13 @@ class api_response:
         return {"status": "success",
                 "data": self.output}
 
-    def error_output(self):
+    def error_req(self):
         return {"code": 500,
                 "status": "error",
-                "message": "internal server error",
-                "data": []}
+                "message": "internal server error"}
 
-    def error_req(self):
-        return {"code": 404,
+    def error_output(self):
+        return {"code": 400,
                 "status": "error",
-                "message": "bad request"}
+                "message": "bad request",
+                "data": []}
