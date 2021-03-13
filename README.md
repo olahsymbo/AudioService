@@ -9,25 +9,18 @@ The following steps will guide you through setting up the project
 
 First, clone the repo 
 
-`git clone https://wikoced@bitbucket.org/hypi-universe/hypi_services_ocr.git`
+`git clone https://github.com/olahsymbo/AudioService.git`
 
 #### Install and configure virtual environment
 
-Goto project directory:
+Goto project directory and setup virtual environment:
 
-`cd hypi_services_ocr`
-
-Inside the directory install virtual environment:
-
-`pip3 install virtualenv` 
-
-Setup a virtualenv name for the project e.g:
-
-`virtualenv ocrenv`
-
-Activate the virtual environment (important to activate this)
-
-`source ocrenv/bin/activate`
+```
+cd hypi_services_ocr
+pip3 install virtualenv
+virtualenv audioserv
+source audioserv/bin/activate
+```
 
 To ensure this app functions properly, install the dependencies in the `requirements.txt` Simply run:
 
@@ -36,32 +29,56 @@ To ensure this app functions properly, install the dependencies in the `requirem
 #### Create a Postgres DB
 First install postgresql 12.2 (incase it's not installed already).
 
-One way of doing this is to download the postgresql app from https://postgresapp.com/downloads.html or use homebrew by running:
-
-`brew install postgresql`
-
-After installing postgresql, start all postgresql services from terminal by either running (postgres must be running at all times):
-
-`pg_ctl -D /usr/local/var/postgres start or brew services start postgresql`
-
 Second, create a new postgres database named task using:
 
-`CREATEDB nerdb;`
+`CREATEDB audiodb;` 
 
-Afterward, launch the task db shell by running:
+inside the db shell, create username and password for the database using:
 
-`psql nerdb`
+`CREATE USER audiodev with encrypted password 'audiodev';` 
 
-create username and password for the database using:
 
-`CREATE USER hypidev with encrypted password 'hypidev';`
+### Run the AudioService 
 
-grant all privileges of the db to USER hypidev using:
+Launch the flask web server using:
 
-`GRANT ALL PRIVILEGES ON DATABASE task TO hypidev;`
+`python app.py`
 
-grant the USER the role to create new db using:
+The base url is:
 
-`ALTER USER hypidev CREATEDB;`
+`http://127.0.0.1:5000/`
 
-Create the data fields in nerdb
+A sample request to create a song file:
+```
+curl --location --request POST 'http://127.0.0.1:5000/create' \
+--form 'audioFileType="song"' \
+--form 'audioFileMetadata="{\"name\": \"fernando\", \"duration\": \"106\",
+\"uploaded_at\": \"20210220\"}"'
+```
+
+### API Response
+
+The standard expected response is `.json` with:
+```
+{
+    "data": {
+        "duration": 106,
+        "id": 18,
+        "name": "fernando",
+        "uploaded_at": "Sat, 20 Feb 2021 00:00:00 GMT"
+    },
+    "status": "success"
+}
+```
+
+
+Standard error response will be:
+
+```
+{
+    "code": 500,
+    "data": [],
+    "message": "internal server error",
+    "status": "error"
+}
+```
