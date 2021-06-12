@@ -1,4 +1,4 @@
-name: Note4me
+name: AudioService
 
 on:
   push:
