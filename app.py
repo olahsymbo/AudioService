@@ -2,13 +2,13 @@ import os
 import sys
 import inspect
 
-
 app_path = inspect.getfile(inspect.currentframe())
 module_dir = os.path.realpath(os.path.dirname(app_path))
 
 sys.path.insert(0, module_dir)
 
-import json, traceback
+import json
+import traceback
 from api_response import api_response
 from flask import Flask, request, jsonify
 from table_models.models import Song, Podcast, AudioBook, db
