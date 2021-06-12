@@ -1,17 +1,16 @@
 import os
 import sys
 import inspect
+import json
+import logging
+from api_response import api_response
+from flask import Flask, request, jsonify
+from table_models.models import Song, Podcast, AudioBook, db
 
 app_path = inspect.getfile(inspect.currentframe())
 module_dir = os.path.realpath(os.path.dirname(app_path))
 
 sys.path.insert(0, module_dir)
-
-import json
-import traceback
-from api_response import api_response
-from flask import Flask, request, jsonify
-from table_models.models import Song, Podcast, AudioBook, db
 
 app = Flask(__name__)
 
@@ -39,6 +38,7 @@ def create_audio():
             output = api_response(data.serialize())
             return jsonify(output.true_output()), 200
         except Exception as error:
+            logging.error([error])
             output = api_response(data)
             return jsonify(output.error_output()), 400
 
@@ -64,6 +64,7 @@ def delete_audio(audioFileType, audioFileID):
 
             return jsonify(success=True), 200
         except Exception as error:
+            logging.error([error])
             return jsonify(success=False), 400
 
     else:
@@ -93,6 +94,7 @@ def update_audio(audioFileType, audioFileID):
             output = api_response(metadata)
             return jsonify(output.true_output()), 200
         except Exception as error:
+            logging.error([error])
             output = api_response(metadata)
             return jsonify(output.error_output()), 400
 
@@ -116,6 +118,7 @@ def get_audio(audioFileType, audioFileID):
             output = api_response(instance.serialize())
             return jsonify(output.true_output()), 200
         except Exception as error:
+            logging.error([error])
             output = api_response(instance)
             return jsonify(output.error_output()), 400
 
