@@ -1,3 +1,5 @@
+[![AudioService](https://github.com/olahsymbo/AudioService/actions/workflows/audio-service-pipeline.yml/badge.svg)](https://github.com/olahsymbo/AudioService/actions/workflows/audio-service-pipeline.yml)
+
 ## Audio Service
 This service provides functionality (endpoints) to create, read, upload, and delete audio file
 from the database.
