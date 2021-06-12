@@ -33,11 +33,8 @@ jobs:
       - name: Coverage report
         run: |
           pip install coverage
-          coverage run manage.py test
+          coverage run --source . app.py  -m
           coverage report
-      - name: Django Testing
-        run: python3 manage.py test
-
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
