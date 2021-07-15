@@ -17,7 +17,6 @@ app = Flask(__name__)
 
 @app.route("/create", methods=['POST'])
 def create_audio():
-    output = []
     if request.method == 'POST':
         data = []
         try:
